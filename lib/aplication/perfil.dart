@@ -44,7 +44,18 @@ Widget espaco(double altura, double largura) {
 Widget botaoEditar() {
   return IconButton(
     onPressed: () {
+      // editar();
       //ao ser clicado exibe outra tela com os campos de texto, sei la...
+      //não funciona, mas deveria ter uma telinha sobrepondo, com os campos textfield/label email e senha.
+      Stack(
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.amber,
+          )
+        ],
+      );
     },
     icon: Icon(Icons.edit, color: Colors.white, size: 30),
   );
@@ -114,48 +125,54 @@ Widget email() {
   );
 }
 
+// showAlertDialogSairDoApp(BuildContext context) {
+//   Widget cancelaButton = ElevatedButton(
+//     child: Text(
+//       "Cancelar",
+//       style: TextStyle(fontSize: 20),
+//     ),
+//     onPressed: () {
+//       //volta a tela anterior do contexto
+//       Navigator.of(context).pop();
+//     },
+//   );
+//   Widget continuaButton = ElevatedButton(
+//     child: Text("Sair", style: TextStyle(fontSize: 20)),
+//     onPressed: () {
+//       //encerra a aplicação
+//     },
+//   );
+
+//   Widget nomeEdit() {}
+
+//   //configura o AlertDialog
+//   AlertDialog editar = AlertDialog(
+//     title: Text(""),
+//     actions: [
+//       nomeEdit,
+//       emailEdit,
+//     ],
+//   );
+//   //exibe o diálogo
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return editar;
+//     },
+//   );
+// }
 
 
-/*cadastro
-    -1º nome
-    -2º nome
-    -email (user)
-    -password
-    -//restringe se for administrador através do dominio do email
-    //todos os campos obrigatórios
-*/
+Widget nome() {
+  return TextField();
+}
 
-/*classe usuario
-  -molde para o objeto usuario, cujos atributos de 1 e 2 nome, email e password serao definidos no momento do cadastro - através de funções
-  //deve conter metodos como adicionar novo usuario, editar usuario, (a nivel de adm: listar usuarios e remover usuarios), verificar se um email a ser cadastrado já nao está linkado a outra conta, remover/excluir a própria conta(usuario comum)
-  campos adicionais:
-    -pontuação;
-    -progresso (algo como, modulo 1 ok, a porcentagem de acertos,...)
- */
+editar() {
+  return Scaffold(
+      body: Column(
+    children: [
+      nome(),
+    ],
+  ));
+}
 
-/*List / map
-  -para salvar os usuarios (objetos instanciados a cada cadastro), talvez uma coleção para adm e outra para user, ou unica (dferenciando adm de user atraves do dominio de email)
- */
-
-
-/*login:
-    -ao submeter o login, percorre a lista verificando se email e senha estao cadastrados,
-    -entra na tela home
- */
-
-/* Perfil
-  Crud: foto, nome(1º e 2º), email, senha
-  ações de editar e remover os dados devem ser modificados na coleção, no objeto que representa o usuario logado.
- */
-
-/*administrador
-  -postar novas perguntas
-  -ver e editar perguntas existentes
-  -remover pergntas
-  -remover um usuario (caso de inatividade)
-  -jogar //para testar as modificações
- */
-
-/*Coleção de questoes
-  - criar uma coleção/list para armazenar as questoes
-   */

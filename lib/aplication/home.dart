@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'perfil.dart';
@@ -13,7 +15,7 @@ class Home extends StatelessWidget {
         actions: [
           perfil(context),
         ],
-        leading: logout(),
+        leading: logout(context),
         centerTitle: true,
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(200),
@@ -34,7 +36,8 @@ class Home extends StatelessWidget {
                       'Aprenda Pro!',
                       style: TextStyle(
                           fontSize: 28,
-                          fontFamily: 'pacifico',fontWeight: FontWeight.bold,
+                          fontFamily: 'pacifico',
+                          fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 148, 236, 140)),
                     ),
                   ],
@@ -79,13 +82,15 @@ Widget perfil(BuildContext context) {
   );
 }
 
-Widget logout() {
+Widget logout(context) {
   return TextButton(
     child: const Text(
       'Sair',
       style: TextStyle(fontSize: 18, color: Colors.white),
     ),
-    onPressed: () {},
+    onPressed: () {
+      showAlertDialogSairDoApp(context);
+    },
   );
 }
 
@@ -96,11 +101,18 @@ Widget help() {
     child: OutlinedButton.icon(
         style: TextButton.styleFrom(
           foregroundColor: Colors.blue,
-          padding: EdgeInsets.all(7), backgroundColor:Colors.white,
+          padding: EdgeInsets.all(7),
+          backgroundColor: Colors.white,
         ),
         onPressed: () {},
-        icon: Icon(Icons.help, size: 25,),
-        label: Text('Ajuda', style: TextStyle(fontSize: 22),)),
+        icon: const Icon(
+          Icons.help,
+          size: 25,
+        ),
+        label: const Text(
+          'Ajuda',
+          style: TextStyle(fontSize: 22),
+        )),
   );
 }
 
@@ -111,8 +123,8 @@ Widget jogar() {
       style: TextButton.styleFrom(
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
-        minimumSize: Size(200, 50),
-        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+        minimumSize: const Size(200, 50),
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       ),
       onPressed: () {},
       child: const Text(
@@ -130,8 +142,8 @@ Widget niveis() {
         style: TextButton.styleFrom(
             backgroundColor: Colors.green,
             foregroundColor: Colors.white,
-            minimumSize: Size(200, 50),
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 5)),
+            minimumSize: const Size(200, 50),
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5)),
         onPressed: () {},
         child: const Text(
           'Níveis',
@@ -150,5 +162,39 @@ Widget corpo() {
       jogar(),
       niveis(),
     ],
+  );
+}
+
+showAlertDialogSairDoApp(BuildContext context) {
+  Widget cancelaButton = ElevatedButton(
+    child: Text("Cancelar", style: TextStyle(fontSize: 20),),
+    onPressed: () {
+      //volta a tela anterior do contexto
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continuaButton = ElevatedButton(
+    child: Text("Sair", style: TextStyle(fontSize: 20)),
+    onPressed: () {
+      //encerra a aplicação
+      exit(0);
+    },
+  );
+
+  //configura o AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Logout"),
+    content: Text("Você realmente deseja sair ?", style: TextStyle(fontSize: 20),),
+    actions: [
+      cancelaButton,
+      continuaButton,
+    ],
+  );
+  //exibe o diálogo 
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
   );
 }
